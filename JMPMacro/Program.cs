@@ -15,23 +15,23 @@ namespace JMPMacro {
             }
         }
         
-        static void KeyEvent(Keys vkKey, ref bool ret) {
+        static void KeyEvent(Keys vkKey, ref bool bNext) {
             switch(vkKey) {
             case Keys.MediaPlayPause:
-                ret = !Player.Play();   //재생/일시정지
-                if(!ret) ExitProgram = true;
+                bNext = !Player.Play();   //재생/일시정지
+                if(bNext) ExitProgram = true;
                 break;
             case Keys.MediaNextTrack:
-                ret = !Player.Next();   //다음 트랙 재생
-                if(!ret) ExitProgram = true;
+                bNext = !Player.Next();   //다음 트랙 재생
+                if(bNext) ExitProgram = true;
                 break;
             case Keys.MediaPreviousTrack:
-                ret = !Player.Prev();   //이전 트랙 재생
-                if(!ret) ExitProgram = true;
+                bNext = !Player.Prev();   //이전 트랙 재생
+                if(bNext) ExitProgram = true;
                 break;
             case Keys.MediaStop:
                 Keyhook.Unhook();       //정지 (프로그램 종료)
-                ret = ExitProgram = true;
+                bNext = ExitProgram = true;
                 break;
             }
         }
