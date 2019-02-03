@@ -1,11 +1,18 @@
 ﻿using System.Threading;
 using System.Windows.Forms;
+using Microsoft.VisualBasic.Devices;
 
 namespace JMPMacro {
     class Program {
         static bool ExitProgram;
+        static Mutex InstanceMutex;
 
         static void Main(string[] args) {
+            //중복 실행 검사
+            const string MutexName = "JMPMacroInstance";
+            InstanceMutex = new Mutex(true, MutexName, out bool isNew);
+            if(!isNew) return;
+
             //키보드 후킹
             Keyhook.KeyPressed += KeyEvent;
             Keyhook.Hook();
